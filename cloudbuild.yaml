@@ -26,9 +26,8 @@ steps:
     env:
       - 'GOOGLE_CLOUD_PROJECT=$_PROJECT_ID'
 
-   options:
+options:
   logging: CLOUD_LOGGING_ONLY
-
 
 substitutions:
   _PROJECT_ID: 'cloudops-479805'  # Replace with your project ID
