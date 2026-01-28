@@ -12,7 +12,7 @@ provider "google" {
 }
 
 resource "google_storage_bucket" "no-public-access" {
-  name          = "cloudbuild-bucket"
+  name          = "ammar-bucket"
   location      = "US"
   force_destroy = true
 
