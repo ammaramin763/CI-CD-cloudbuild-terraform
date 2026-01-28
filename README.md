@@ -12,9 +12,11 @@ Deploys a Google Cloud Storage (GCS) bucket using Terraform + Cloud Build CI/CD 
 ✅ Production-ready Terraform code
 
 📁 Project Structure
+
 text
 ├── cloudbuild.yaml     # Cloud Build pipeline
 └── main.tf            # Terraform GCS bucket
+
 🔧 Quick Setup (2 minutes)
 1. Update Project ID
 Edit main.tf:
@@ -24,6 +26,7 @@ provider "google" {
   project = "YOUR-PROJECT-ID-HERE"  # ← Add your GCP project
   region  = "us-central1"
 }
+
 2. Create Cloud Build Trigger
 Go to Cloud Build → Triggers
 
@@ -37,18 +40,21 @@ Event: Push to any branch
 Source: your-github-repo
 Build config: cloudbuild.yaml
 Substitution: _PROJECT_ID=your-project-id
+
 3. Push to Deploy
 bash
 git add .
 git commit -m "Deploy GCS bucket"
-git push origin main
+git push
+
 Bucket deploys automatically! 🎉
 
 🛠️ How It Works
-text
+
 GitHub Push → Cloud Build Trigger → Terraform Init → Validate → Apply
                                                       ↓
                                                 Bucket Created!
+
 Push code to any branch
 
 Cloud Build runs cloudbuild.yaml
@@ -67,9 +73,9 @@ Example bucket name: my-bucket-ab12cd34
 🔒 Permissions Required
 Cloud Build service account needs:
 
-text
 roles/storage.admin
 roles/cloudbuild.builds.builder
+
 🎯 Usage
 Development: Push to dev branch
 
@@ -78,7 +84,7 @@ Production: Push to main branch
 Testing: Push to any feature branch
 
 🧹 Cleanup
-bash
+
 # Destroy via Cloud Build
 echo "force_destroy = false" >> main.tf
 git commit -m "Disable force_destroy"
@@ -93,17 +99,6 @@ Step	Action	Duration
 3	terraform apply	45s
 Total: ~1.5 minutes from git push to bucket ready!
 
-🤝 Contributing
-Fork repo
-
-Create feature branch (git checkout -b feature/amazing)
-
-Commit changes (git commit -m "Add amazing feature")
-
-Push → Auto-deploys to test bucket!
-
-📄 License
-MIT License - use it freely! 🚀
 
 Built with ❤️ for DevOps automation
 Deployed via Cloud Build from GitHub
