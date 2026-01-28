@@ -8,11 +8,11 @@ terraform {
 }
 
 provider "google" {
-  # Configuration options
+  project = "cloudops-479805"
 }
 
 resource "google_storage_bucket" "no-public-access" {
-  name          = "no-public-access-bucket"
+  name          = "cloudbuild-bucket"
   location      = "US"
   force_destroy = true
 
