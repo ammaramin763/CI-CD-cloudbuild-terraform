@@ -11,21 +11,16 @@ provider "google" {
   project = "cloudops-479805"
 }
 
-resource "google_storage_bucket" "my_app_bucket" {
-  name                        = "my-app-bucket-${random_id.bucket_suffix.hex}"
-  location                    = "US"
-  storage_class               = "STANDARD"
-  force_destroy               = true
-  uniform_bucket_level_access = true
-
- 
-  # Block public access
-  public_access_prevention = "enforced"
-
-
-# Random suffix for unique global bucket name
-resource "random_id" "bucket_suffix" {
+resource "random_id" "suffix" {
   byte_length = 4
 }
 
+resource "google_storage_bucket" "bucket" {
+  name     = "my-bucket-${random_id.suffix.hex}"
+  location = "US"
+  force_destroy = true
+}
+
+output "bucket_name" {
+  value = google_storage_bucket.bucket.name
 }
