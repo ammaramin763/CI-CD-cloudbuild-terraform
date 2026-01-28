@@ -1,0 +1,31 @@
+steps:
+  # Step 1: Terraform Init
+  - name: 'hashicorp/terraform:1.9'
+    id: terraform-init
+    entrypoint: 'terraform'
+    args:
+      - 'init'
+    env:
+      - 'GOOGLE_CLOUD_PROJECT=$_PROJECT_ID'
+
+  # Step 2: Terraform Validate
+  - name: 'hashicorp/terraform:1.9'
+    id: terraform-validate
+    entrypoint: 'terraform'
+    args: ['validate']
+    env:
+      - 'GOOGLE_CLOUD_PROJECT=$_PROJECT_ID'
+
+  # Step 3: Terraform Apply (AUTO-APPROVED)
+  - name: 'hashicorp/terraform:1.9'
+    id: terraform-apply
+    entrypoint: 'terraform'
+    args:
+      - 'apply'
+      - '-auto-approve'
+    env:
+      - 'GOOGLE_CLOUD_PROJECT=$_PROJECT_ID'
+
+
+substitutions:
+  _PROJECT_ID: 'cloudops-479805'  # Replace with your project ID
