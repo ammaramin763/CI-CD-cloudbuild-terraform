@@ -11,10 +11,21 @@ provider "google" {
   project = "cloudops-479805"
 }
 
-resource "google_storage_bucket" "no-public-access" {
-  name          = "ammar-bucket"
-  location      = "US"
-  force_destroy = true
+resource "google_storage_bucket" "my_app_bucket" {
+  name                        = "my-app-bucket-${random_id.bucket_suffix.hex}"
+  location                    = "US"
+  storage_class               = "STANDARD"
+  force_destroy               = true
+  uniform_bucket_level_access = true
 
+ 
+  # Block public access
   public_access_prevention = "enforced"
+
+
+# Random suffix for unique global bucket name
+resource "random_id" "bucket_suffix" {
+  byte_length = 4
+}
+
 }
